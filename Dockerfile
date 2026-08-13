@@ -32,7 +32,7 @@ RUN apt-get update && apt-get install -y \
 COPY --from=composer:2 /usr/bin/composer /usr/bin/composer
 
 WORKDIR /var/www
-
+RUN sed -i 's/^listen = 9000$/listen = 127.0.0.1:9001/' /usr/local/etc/php-fpm.d/docker.conf
 COPY composer.json composer.lock* ./
 
 RUN composer install \
